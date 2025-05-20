@@ -16,11 +16,11 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileActivity extends AppCompatActivity {
     TextView profileName, profileEmail, profileUsername, profilePassword;
     TextView titleName, titleUsername;
-    Button editProfile;
+    Button editProfile , signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_profile);
         profileName = findViewById(R.id.profileName);
         profileEmail = findViewById(R.id.profileEmail);
         profileUsername = findViewById(R.id.profileUsername);
@@ -28,11 +28,27 @@ public class ProfileActivity extends AppCompatActivity {
         titleName = findViewById(R.id.titleName);
         titleUsername = findViewById(R.id.titleUsername);
         editProfile = findViewById(R.id.editButton);
+        signup = findViewById(R.id.signup_button);
         showAllUserData();
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 passUserData();
+            }
+        });
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile); // Remplace par le nom exact de ton layout
+
+        Button signupButton = findViewById(R.id.signup_button);
+
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile.this, activity_sign_up.class); // Remplace SignupActivity par ta classe réelle
+                startActivity(intent);
             }
         });
     }
@@ -69,6 +85,8 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             }
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
